@@ -1,0 +1,36 @@
+/* #nisa{
+margin: 0 auto;
+width: 400px;
+border: 1px solid black;
+height: 400px;
+margin-top: 200px;
+border-radius: 20px;
+justify-content: center;
+align-content: center;
+text-align: center;
+display: flex;
+flex-direction: column;
+gap: 40px;
+position: relative
+}
+
+#ul{
+
+position: absolute;
+margin: 0 auto;
+font-size: 20px;
+text-decoration: underline;
+}
+#input {
+height: 30px;
+width: 200px;
+}
+#add{
+
+width: 200px;
+height: 40px;
+border-radius: 20px;
+letter-spacing: 5px;
+font-size: 20px;
+
+} */
