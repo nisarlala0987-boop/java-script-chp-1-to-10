@@ -1,9 +1,12 @@
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
   import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-analytics.js";
   import { getAuth, 
     createUserWithEmailAndPassword ,
     onAuthStateChanged,
-    signInWithEmailAndPassword
+    signInWithEmailAndPassword,
+    signOut,
+     GoogleAuthProvider,
+     signInWithPopup
   } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
 
 
@@ -34,17 +37,21 @@
     var no =document.getElementById("place")
     var nom =document.getElementById("pss")
     var nisra=document.getElementById("pass")
-    nisra.addEventListener("click",signup)
-
+     if(nisra) nisra.addEventListener("click",signup)
+var authcon=document.getElementById("auth")
 
       onAuthStateChanged(auth, (user) => {
     if (user) {
       const uid = user.uid;
-      var para=document.getElementById("output")
-      para.innerText=user.email
+      var para=document.getElementById("output")     
 
     } else {
+      var para=document.getElementById("output")     
       
+if(logout) logout.style.display="none"
+authcon.style.display="block"
+no.value=""
+nom.value=""
     }
   });
   
@@ -54,6 +61,8 @@ createUserWithEmailAndPassword(auth, no.value,nom.value)
   .then((userCredential) => {
     const user = userCredential.user;
     console.log(user)
+no.value=""
+nom.value=""
   })
   .catch((error) => {
     const errorCode = error.code;
@@ -65,17 +74,21 @@ createUserWithEmailAndPassword(auth, no.value,nom.value)
 }
 
 
+
+
 var pasw=document.getElementById("pasw")
 var lala=document.getElementById("lala")
 var nisar=document.getElementById("login")
-nisar.addEventListener("click",login)
+ nisar.addEventListener("click",login)
 
 function login() {
 signInWithEmailAndPassword(auth, lala.value, pasw.value)
   .then((userCredential) => {
     const user = userCredential.user;
     console.log("hugya")
-    location.href="https://facebook.com"
+    // location.href="https://youtube.com  "
+  lala.value = ""   
+    pasw.value = ""
   })
   .catch((error) => {
     const errorCode = error.code;
@@ -84,17 +97,39 @@ signInWithEmailAndPassword(auth, lala.value, pasw.value)
 
   });
 
+
  
 }
+var logout=document.getElementById("logout")
+if(logout) logout.addEventListener("click",logouts)
+
+function logouts() {
+    signOut(auth)
+    .then(() => {
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+}
+var googleb=document.getElementById("google")
+if(googleb) googleb.addEventListener("click",googlesign)
+
+const provider = new GoogleAuthProvider();
+function googlesign() {
+
+  signInWithPopup(auth, provider)
+  .then((result) => {
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+  }).catch((error) => {
+    // Handle Errors here.
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    const email = error.customData.email;
+    const credential = GoogleAuthProvider.credentialFromError(error);
+    // ...
+  });
 
 
-"i am nisar"
-"i am nisar"
-
-
-  
-
-
-
-
-
+}
