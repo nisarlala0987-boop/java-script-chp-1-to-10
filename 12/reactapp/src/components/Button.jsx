@@ -1,7 +1,14 @@
 import React from 'react'
 
-export default function Button() {
+function Button(props) {
   return (
-    <div>Button</div>
+    <div>
+      <h1>{props.title || props.subtitle}</h1>
+      </div>
   )
 }
+
+
+
+
+export default Button
