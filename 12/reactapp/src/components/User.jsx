@@ -5,6 +5,7 @@ function User(props) {
     <div>User
 <h1>{props.name}</h1>
 <h1>{props.age}</h1>
+<h1>{props.age}</h1>
 
     </div>
 
